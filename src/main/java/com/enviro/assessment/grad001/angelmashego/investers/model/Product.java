@@ -53,6 +53,6 @@ public class Product {
     private double currentBalance;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "invester_id")
     private Invester invester;
 }
