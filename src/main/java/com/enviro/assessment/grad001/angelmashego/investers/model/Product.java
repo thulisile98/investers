@@ -52,7 +52,7 @@ public class Product {
     private String type;
     private double currentBalance;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "invester_id")
     private Invester invester;
 }
