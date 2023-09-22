@@ -22,8 +22,8 @@ public class InvesterServiceImplementation implements InvesterService{
 
     @Override
     public Invester getInvesterById(Long id) {
-        Optional<Invester> investorOptional = investerRepository.findById(id);
-        return investorOptional.orElse(null);
+        Optional<Invester> investerOptional = investerRepository.findById(id);
+        return investerOptional.orElse(null);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class InvesterServiceImplementation implements InvesterService{
 
     @Override
     public Invester createInvester(Invester invester) {
-        return null;
+        return investerRepository.save(invester);
     }
 
     @Override
@@ -45,5 +45,23 @@ public class InvesterServiceImplementation implements InvesterService{
     public void deleteInvester(Long id) {
         investerRepository.deleteById(id);
 
+    }
+
+    public Invester updateInvestor(Long id, Invester updatedInvester) {
+        Optional<Invester> investerOptional = investerRepository.findById(id);
+        if (investerOptional.isPresent()) {
+            Invester existingInvester = investerOptional.get();
+            // Update the fields of the existing investor with the values from updatedInvestor
+            existingInvester.setFirstName(updatedInvester.getFirstName());
+            existingInvester.setLastName(updatedInvester.getLastName());
+            existingInvester.setAddress(updatedInvester.getAddress());
+            existingInvester.setContact(updatedInvester.getContact());
+
+            // Save the updated investor
+            return investerRepository.save(existingInvester);
+        } else {
+            // Investor not found
+            return null;
+        }
     }
 }

@@ -3,31 +3,26 @@ package com.enviro.assessment.grad001.angelmashego.investers.controller;
 import com.enviro.assessment.grad001.angelmashego.investers.exception.InvesterNotFoundException;
 import com.enviro.assessment.grad001.angelmashego.investers.model.Invester;
 import com.enviro.assessment.grad001.angelmashego.investers.repository.InvesterRepository;
+import com.enviro.assessment.grad001.angelmashego.investers.service.InvesterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
+@RequestMapping("/investers")
 public class InvesterController {
 
     @Autowired
     private InvesterRepository investerRepository;
 
-    @PostMapping("/INVESTER")
-    Invester newInvester(@RequestBody Invester newInvester){
-        return  investerRepository.save(newInvester);
-    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Invester> getInvesterWithProducts(@PathVariable Long id) {
 
-    @GetMapping("/INVESTERS")
-    List<Invester> getAllInvesters(){
-        return  investerRepository.findAll();
-    }
+        Invester invester = investerRepository.findById(id)
+                .orElseThrow(() -> new InvesterNotFoundException(id));
 
-    @GetMapping("/INVESTER/{id}")
-    Invester getInvesterById(@PathVariable Long id){
-        return  investerRepository.findById(id)
-                .orElseThrow(()->new InvesterNotFoundException(id));
-    }}
+        return ResponseEntity.ok(invester);
+    }
+}
 
 

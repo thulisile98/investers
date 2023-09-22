@@ -1,6 +1,5 @@
 package com.enviro.assessment.grad001.angelmashego.investers.controller;
 
-import com.enviro.assessment.grad001.angelmashego.investers.model.Invester;
 import com.enviro.assessment.grad001.angelmashego.investers.model.Product;
 import com.enviro.assessment.grad001.angelmashego.investers.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

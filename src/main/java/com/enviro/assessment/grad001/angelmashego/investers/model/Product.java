@@ -2,6 +2,9 @@ package com.enviro.assessment.grad001.angelmashego.investers.model;
 
 import jakarta.persistence.*;
 
+import java.util.Calendar;
+import java.util.List;
+
 @Entity
 public class Product {
     @Id
@@ -52,7 +55,28 @@ public class Product {
     private String type;
     private double currentBalance;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invester_id")
     private Invester invester;
+
+
+    @OneToMany(mappedBy = "product")
+    private List<WithdrawalNotice> withdrawalNotices;
+
+    public List<WithdrawalNotice> getWithdrawalNotices() {
+        return withdrawalNotices;
+    }
+
+    public void setWithdrawalNotices(List<WithdrawalNotice> withdrawalNotices) {
+        this.withdrawalNotices = withdrawalNotices;
+    }
+    private String productName;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 }

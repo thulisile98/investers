@@ -8,7 +8,7 @@ import java.util.List;
 public class Invester {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
     public Long getId() {
@@ -67,6 +67,7 @@ public class Invester {
 
 
 
-    @OneToMany
+
+        @OneToMany(mappedBy = "invester", cascade = CascadeType.ALL)
     private List<Product> products;
 }

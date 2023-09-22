@@ -2,7 +2,7 @@ package com.enviro.assessment.grad001.angelmashego.investers.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class WithdrawalNotice {
@@ -10,13 +10,20 @@ public class WithdrawalNotice {
     @Id
     @GeneratedValue
     private long id;
+    @Column(name = "withdrawal_amount")
     private double withdrawalAmount;
 
-    private LocalDate withdrawalDate;
+    @Column(name = "withdrawal_date")
+    private Date withdrawalDate;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+
+    public WithdrawalNotice() {
+    }
+
 
     public long getId() {
         return id;
@@ -34,11 +41,11 @@ public class WithdrawalNotice {
         this.withdrawalAmount = withdrawalAmount;
     }
 
-    public LocalDate getWithdrawalDate() {
+    public Date getWithdrawalDate() {
         return withdrawalDate;
     }
 
-    public void setWithdrawalDate(LocalDate withdrawalDate) {
+    public void setWithdrawalDate(Date withdrawalDate) {
         this.withdrawalDate = withdrawalDate;
     }
 
@@ -49,4 +56,7 @@ public class WithdrawalNotice {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+
+
 }
